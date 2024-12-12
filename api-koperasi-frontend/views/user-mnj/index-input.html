@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Form Input Data</h2>
+        <form action="/submit" method="POST">
+            <!-- Nama -->
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+            </div>
+            <!-- Jurusan -->
+            <div class="form-group">
+                <label for="jurusan">Jurusan</label>
+                <input type="text" class="form-control" id="jurusan" name="jurusan" placeholder="Masukkan jurusan" required>
+            </div>
+            <!-- Fakultas -->
+            <div class="form-group">
+                <label for="fakultas">Fakultas</label>
+                <select class="form-control" id="fakultas" name="fakultas" required>
+                    <option value="" disabled selected>Pilih fakultas</option>
+                    <option value="Fakultas Teknik">Fakultas Teknik</option>
+                    <option value="Fakultas Ekonomi">Fakultas Ekonomi</option>
+                    <option value="Fakultas Kedokteran">Fakultas Kedokteran</option>
+                    <option value="Fakultas Hukum">Fakultas Hukum</option>
+                    <option value="Fakultas Ilmu Sosial">Fakultas Ilmu Sosial</option>
+                </select>
+            </div>
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+        </form>
+    </div>
+
+    <!-- Link to Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const mhsId = urlParams.get('id');
+            console.log("ID yang diterima:", mhsId);
+            alert(`ID yang diterima: ${mhsId}`);
+
+
+            const form = document.getElementById("updateForm");
+            const responseMessage = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                // Mengambil nilai dari form
+                const id = document.getElementById("id").value;
+                const nama = document.getElementById("nama").value;
+                const jurusan = document.getElementById("jurusan").value;
+                const fakultas = document.getElementById("fakultas").value;
+
+                // Membuat payload untuk API
+                const payload = {
+                    id: id,
+                    nama: nama,
+                    jurusan: jurusan,
+                    fakultas: fakultas,
+                };
+
+                // Mengirimkan data ke API
+                fetch("http://localhost:8080/api/mhsUpdate?id=${encodeURIComponent{id}}", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Gagal memperbarui data.");
+                        }
+                        return response.text();
+                    })
+                    .then((message) => {
+                        responseMessage.innerHTML = `<div class="alert alert-success">${message}</div>`;
+                        form.reset();
+                    })
+                    .catch((error) => {
+                        responseMessage.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+                    });
+            });
+        
+
+        });
+
+
+
+    </script>
+
+
+</body>
+</html>

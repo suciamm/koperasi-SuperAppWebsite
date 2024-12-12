@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:;base64,=">
+
+    <title>profile menu anggota</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Logo">
+            </a>
+            <!-- Profile Icon -->
+            <div class="profile-icon">
+                <i class="bi bi-person"></i>
+                <div class="profile-dropdown">
+                    <h5>John Doe</h5>
+                    <p>Email: john.doe@example.com</p>
+                    <a href="profile.html">View Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="home.html"><i class="bi bi-house-door"></i> Home</a>
+        <a href="#"><i class="bi bi-wallet2"></i> Simpanan</a>
+        <a href="#"><i class="bi bi-arrow-up-right"></i> Pinjaman</a>
+        <a href="#"><i class="bi bi-gift"></i> Angsuran</a>
+        <!-- <a href="profile.html" class="active"><i class="bi bi-arrow-repeat"></i> Profile</a> -->
+     </div>
+
+
+    <!-- Konten spesifik halaman -->
+    <div class="content">
+            <!-- Informasi Awal -->
+    <div id="infoTable">
+        <h2>Informasi Data Anda</h2>
+        <!-- <button onclick="showForm()">Registrasi</button> -->
+         <button id="register-btn">Registrasi</button>
+
+        <table>
+            <tr>
+                <th colspan="2">Data Pribadi</th>
+            </tr>
+            <tr>
+                <td>Nama Lengkap</td>
+                <!-- <td>{{.Nama_lengkap}}</td> -->
+                 <td id="nama_lengkap">-</td>
+            </tr>
+            <tr>
+                <td>Jenis Kelamin</td>
+                <!-- <td>{{.Jenis_kelamin}}</td> -->
+                 <td id="jenis_kelamin">-</td>
+            </tr>
+            <tr>
+                <td>Tempat</td>
+                <!-- <td>{{.Tempat}}</td> -->
+                 <td id="tempat">-</td>
+            </tr>
+            <tr>
+                <td>Tanggal Lahir</td>
+                <!-- <td>{{.Tanggal_lahir.Format "02-01-2006"}}</td> -->
+                 <td id="tanggal_lahir">-</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <!-- <td>{{.Status}}</td> -->
+                 <td id="status">-</td>
+            </tr>
+            <tr>
+                <td>Agama</td>
+                <!-- <td>{{.Agama}}</td> -->
+                 <td id="agama">-</td>
+            </tr>
+            <tr>
+                <td>Pekerjaan</td>
+                <!-- <td>{{.Pekerjaan}}</td> -->
+                 <td id="pekerjaan">-</td>
+            </tr>
+            <tr>
+                <th colspan="2">Kontak</th>
+                 <!-- <td id="no_telepon">-</td> -->
+            </tr>
+            <tr>
+                <td>Alamat</td>
+                <!-- <td>{{.Alamat}}</td> -->
+                 <td id="alamat">-</td>
+            </tr>
+            <tr>
+                <td>Kota</td>
+                <!-- <td>{{.Kota}}</td> -->
+                 <td id="kota">-</td>
+            </tr>
+            <tr>
+                <td>Kode Pos</td>
+                <!-- <td>{{.Kode_pos}}</td> -->
+                 <td id="kode_pos">-</td>
+            </tr>
+            <tr>
+                <td>No Telepon</td>
+                <!-- <td>No_telepon</td> -->
+                 <td id="no_telepon">-</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td id="profile-email">-</td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <!-- <td>{{.Password}}</td> -->
+                 <td id="password">-</td>
+            </tr>
+            <tr>
+                <th colspan="2">Status Anggota</th>
+            </tr>
+            <tr>
+                <td>Status Anggota</td>
+                <!-- <td>{{.Verified}}</td> -->
+                 <td id="verified">-</td>
+            </tr>
+            <tr>
+                <td>Tanggal Bergabung</td>
+                <!-- <td>{{.Tanggal_bergabung.Format "02-01-2006"}}</td> -->
+                 <td id="tanggal_bergabung">-</td>
+            </tr>
+            <tr>
+                <th colspan="2">Verifikasi Akun</th>
+            </tr>
+            <tr>
+                <td>KTP</td>
+                <!-- <td>{{.Ktp}}</td> -->
+                 <td id="ktp">-</td>
+            </tr>
+            <tr>
+                <td>Kartu Keluarga</td>
+                <!-- <td>{{.Kk}}</td> -->
+                 <td id="kk">-</td>
+            </tr>
+            <tr>
+                <td>Rekening Koran</td>
+                <!-- <td>{{.Rekening_koran}}</td> -->
+                 <td id="rekening_koran">-</td>
+            </tr>
+            <tr>
+                <td>Surat Bukti Domisili</td>
+                <!-- <td>{{.Prove_of_residence}}</td> -->
+                 <td id="prove_of_residence">-</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <!-- Form Input (Awalnya Disembunyikan) -->
+    <div id="formContainer" class="hidden">
+        <h2>Formulir Data Pribadi</h2>
+        <form id="register-form">
+        <!-- <form action="http://localhost:8080/api/register2" method="POST" enctype="multipart/form-data" id="register-form"> -->
+
+            <table>
+                <!-- Kategori Data Pribadi -->
+                <tr>
+                    <th colspan="2">Data Pribadi</th>
+                </tr>
+                <tr>
+                    <td><label for="nama_lengkap">Nama Lengkap</label></td>
+                    <td><input type="text" id="nama_lengkap" name="nama_lengkap" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="jenis_kelamin">Jenis Kelamin</label></td>
+                    <td>
+                        <select id="jenis_kelamin" name="jenis_kelamin" required>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="tempat">Tempat Lahir</label></td>
+                    <td><input type="text" id="tempat" name="tempat" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="tanggal_lahir">Tanggal Lahir</label></td>
+                    <td><input type="date" id="tanggal_lahir" name="tanggal_lahir" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="status">Status</label></td>
+                    <td>
+                        <select id="status" name="status" required>
+                            <option value="Belum Kawin">Belum Kawin</option>
+                            <option value="Sudah Kawin">Sudah Kawin</option>
+                            <option value="Cerai Hidup">Cerai Hidup</option>
+                            <option value="Cerai Mati">Cerai Mati</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="agama">Agama</label></td>
+                    <td>
+                        <select id="agama" name="agama" required>
+                            <option value="Islam">Islam</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Budha">Budha</option>
+                            <option value="Protestan">Protestan</option>
+                            <option value="Katholik">Katholik</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="pekerjaan">Pekerjaan</label></td>
+                    <td><input type="text" id="pekerjaan" name="pekerjaan" required /></td>
+                </tr>
+    
+                <!-- Kategori Kontak -->
+                <tr>
+                    <th colspan="2">Kontak</th>
+                </tr>
+                <tr>
+                    <td><label for="alamat">Alamat</label></td>
+                    <td><input type="text" id="alamat" name="alamat" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="kota">Kota</label></td>
+                    <td><input type="text" id="kota" name="kota" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="kota">Kode pos</label></td>
+                    <td><input type="text" id="kode_pos" name="kode_pos" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="no_telepon">No Telepon</label></td>
+                    <td><input type="tel" id="no_telepon" name="no_telepon" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="email" id="profile-email" name="email" required /></td>
+                </tr>
+    
+                <!-- Kategori Status Anggota -->
+                <tr>
+                    <th colspan="2">Status Anggota</th>
+                </tr>
+                <tr>
+                    <td><label for="status">Status Anggota</label></td>
+                    <td>
+                        <select id="status" name="status" required>
+                            <option value="Aktif">Aktif</option>
+                            <option value="Tidak Aktif">Tidak Aktif</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="tanggal_bergabung">Tanggal Bergabung</label></td>
+                    <td><input type="date" id="tanggal_bergabung" name="tanggal_bergabung" disabled/></td>
+                </tr>
+    
+                <!-- Kategori Verifikasi Data -->
+                <tr>
+                    <th colspan="2">Verifikasi Data</th>
+                </tr>
+                <tr>
+                    <td><label for="ktp">Upload KTP</label></td>
+                    <td><input type="file" id="ktp" name="ktp" accept=".jpg,.jpeg,.png,.pdf" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="kk">Upload KK</label></td>
+                    <td><input type="file" id="kk" name="kk" accept=".jpg,.jpeg,.png,.pdf" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="rekening_koran">Upload Rekening Koran</label></td>
+                    <td><input type="file" id="rekening_koran" name="rekening_koran" accept=".jpg,.jpeg,.png,.pdf" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="prove_of_residence">Upload Prove of Residence</label></td>
+                    <td><input type="file" id="prove_of_residence" name="prove_of_residence" accept=".jpg,.jpeg,.png,.pdf" required /></td>
+                </tr>
+    
+                <!-- Tombol Submit -->
+                <tr>
+                    <td colspan="1"><a href="profile.html"><button type="">Batal</button></a></td>
+                    <td colspan="1"><button type="submit" id="submit-btn">Kirim</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <script>
+
+        // function showForm() {
+        //     // Menyembunyikan tabel informasi awal
+        //     document.getElementById("infoTable").classList.add("hidden");
+        //     // Menampilkan form input
+        //     document.getElementById("formContainer").classList.remove("hidden");
+        // }
+
+
+        // Tambahkan event listener untuk button
+        document.getElementById('register-btn').addEventListener('click', function () {
+            // Redirect ke halaman gogreen.html
+            window.location.href = 'profile-registrasi.html';
+        });
+
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const email = sessionStorage.getItem('email'); // Ambil email dari sessionStorage
+            console.log(email)
+            
+            if (!email) {
+                console.log('Email tidak ditemukan di sessionStorage');
+                return;
+            }
+            // alert(email)
+            try {
+                // Kirim permintaan G ET ke server untuk mengambil data berdasarkan email
+                const response = await fetch(`http://localhost:8080/api/profile?email=${encodeURIComponent(email)}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Isi data di form HTML
+                    document.getElementById('nama_lengkap').textContent = data.nama_lengkap || '-';
+                    document.getElementById('jenis_kelamin').textContent = data.jenis_kelamin || '-';
+                    document.getElementById('tempat').textContent = data.tempat || '-';
+                    document.getElementById('tanggal_lahir').textContent = data.tanggal_lahir || '-';
+                    document.getElementById('status').textContent = data.status || '-';
+                    document.getElementById('agama').textContent = data.agama || '-';
+                    document.getElementById('pekerjaan').textContent = data.pekerjaan || '-';
+                    document.getElementById('alamat').textContent = data.alamat || '-';
+                    document.getElementById('kota').textContent = data.kota || '-';
+                    document.getElementById('kode_pos').textContent = data.kode_pos || '-';
+                    document.getElementById('no_telepon').textContent = data.no_telepon || '-';
+                    document.getElementById('profile-email').textContent = `${email}`;
+                    document.getElementById('verified').textContent = data.verified || '-';
+                    document.getElementById('tanggal_bergabung').textContent = data.tanggal_bergabung || '-';
+                    document.getElementById('ktp').textContent = data.ktp ? 'Uploaded' : '-';
+                    document.getElementById('kk').textContent = data.kk ? 'Uploaded' : '-';
+                    document.getElementById('rekening_koran').textContent = data.rekening_koran ? 'Uploaded' : '-';
+                    document.getElementById('prove_of_residence').textContent = data.prove_of_residence ? 'Uploaded' : '-';
+                   
+                    sessionStorage.setItem('verified', data.verified); // Pastikan responseData memiliki properti 'nama'
+                    const verified= sessionStorage.getItem('verified'); // Ambil verifieddari sessionStorage
+                    console.log(verified)
+                    console.log(email)
+                    console.log(data.verified)
+                    
+                } else {
+                    console.error(`Error: ${response.status} - ${response.statusText}`);
+                    alert(`Failed to fetch profile data. Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error("Error fetching profile data:", error);
+                alert("Error fetching profile data. Please check your connection and try again.");
+
+            }
+        });
+
+     </script>
+
+
+
+
+<!-- <script>
+    function showForm() {
+            // Menyembunyikan tabel informasi awal
+            document.getElementById("infoTable").classList.add("hidden");
+            // Menampilkan form input
+            document.getElementById("formContainer").classList.remove("hidden");
+        }
+
+
+    document.getElementById("submit-btn").addEventListener("click", async function (event) {
+        event.preventDefault();
+
+        const data = {
+            nama_lengkap: document.getElementById("nama_lengkap").value,
+            jenis_kelamin: document.getElementById("jenis_kelamin").value,
+            tempat: document.getElementById("tempat").value,
+            tanggal_lahir: document.getElementById("tanggal_lahir").value,
+            status: document.getElementById("status").value,
+            agama: document.getElementById("agama").value,
+            pekerjaan: document.getElementById("pekerjaan").value,
+            alamat: document.getElementById("alamat").value,
+            kota: document.getElementById("kota").value,
+            no_telepon: document.getElementById("no_telepon").value,
+            email: document.getElementById("email").value,
+            status_anggota: document.getElementById("status_anggota").value,
+            tanggal_bergabung: document.getElementById("tanggal_bergabung").value,
+            ktp: document.getElementById("ktp").value,
+            kk: document.getElementById("kk").value,
+            rekening_koran: document.getElementById("rekening_koran").value,
+            prove_of_residence: document.getElementById("prove_of_residence").value,
+           
+
+        };
+
+        try {
+            const response = await fetch("http://localhost:8080/api/students", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || "Gagal menyimpan data.");
+            }
+
+            const result = await response.json();
+            alert(result.message);
+        } catch (err) {
+            console.error("Error submitting form:", err);
+            alert(err.message);
+        }
+    });
+
+
+</script> -->
+
+
+ <!-- <script>
+    function showForm() {
+            // Menyembunyikan tabel informasi awal
+            document.getElementById("infoTable").classList.add("hidden");
+            // Menampilkan form input
+            document.getElementById("formContainer").classList.remove("hidden");
+        }
+
+        document.getElementById("register-form").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+    
+    // Ambil data dari form
+    const formData = new FormData(event.target);
+    const data = {
+        nama_lengkap: formData.get("nama_lengkap"),
+        jenis_kelamin: formData.get("jenis_kelamin"),
+        tempat: formData.get("tempat"),
+        tanggal_lahir: formData.get("tanggal_lahir"), // Format YYYY-MM-DD
+        status: formData.get("status"),
+        agama: formData.get("agama"),
+        pekerjaan: formData.get("pekerjaan"),
+        alamat: formData.get("alamat"),
+        kota: formData.get("kota"),
+        kode_pos: parseInt(formData.get("kode_pos") || "0"),
+        no_telepon: formData.get("no_telepon"),
+        verified: "false", // Default
+        tanggal_bergabung: formData.get("tanggal_bergabung"), // Format YYYY-MM-DD
+        email: formData.get("email"),
+        password: "password", // Set default jika tidak ada di form
+        ktp: formData.get("ktp"),
+        kk: formData.get("kk"),
+        rekening_koran: formData.get("rekening_koran"),
+        prove_of_residence: formData.get("prove_of_residence"),
+    };
+
+    try {
+        const response = await fetch("http://localhost:8080/api/register2", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || "Gagal menyimpan data.");
+        }
+
+        const result = await response.json();
+        alert(result.message);
+    } catch (err) {
+        console.error("Error submitting form:", err);
+        alert(err.message);
+    }
+});
+
+    document.addEventListener("DOMContentLoaded", function () {
+            const profileIcon = document.querySelector(".profile-icon");
+            const profileDropdown = document.querySelector(".profile-dropdown");
+
+            profileIcon.addEventListener("click", function () {
+                profileDropdown.classList.toggle("active");
+            });
+
+            // Menutup dropdown jika klik di luar
+            document.addEventListener("click", function (event) {
+                if (!profileIcon.contains(event.target)) {
+                    profileDropdown.classList.remove("active");
+                }
+            });
+        });
+
+
+ </script> -->
+
+
+    
+</body>
+
+
+</html>

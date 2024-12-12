@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .background {
+            flex: 1;
+            position: relative;
+        }
+
+        /* Logo positioning in the top-right corner */
+        .background img.logo {
+            position: absolute;
+            top: 30px;
+            /* right: 30px; */
+            width: 200px;
+            /* Adjust size as necessary */
+            height: auto;
+        }
+
+        .background img.background-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .login-container {
+            flex: 1;
+            padding: 20px;
+            max-width: 400px;
+        }
+
+        .login-container h2,
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+
+        .link {
+            text-align: center;
+            display: block;
+            margin-top: 15px;
+        }
+
+        .link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="background">
+            <img src="logo.png" alt="logo" class="logo">
+            <img src="background.jpg" alt="background login image">
+        </div>
+
+        <div class="login-container">
+            <h2>KOPTEKMAPAN</h2>
+            <p>Sign in to your account to start using this web application</p>
+            
+            <form id="login-form">
+                <input type="email" name="email" placeholder="Email" class="form-control" required>
+                <input type="password" name="password" placeholder="Password" class="form-control" required>
+                <button type="submit" class="login-button">Sign in</button>
+            </form>
+            <div id="error-message" style="color: red; display: none;"></div>
+                        
+            <div class="link">
+                <a href="/reset-password" id="reset-btn">Forgot password?</a>
+            </div>
+            <div class="link">
+                <a href="/register" id="sign-in-btn">Don't have an account? please sign up</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Ambil elemen tombol dengan ID
+        const regisButton = document.getElementById('sign-in-btn');
+    
+        // Tambahkan event listener untuk klik
+        regisButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Mencegah tindakan default dari link
+            window.location.href = '/views/user-mnj/register.html'; // Arahkan ke halaman login
+        });
+
+         // Ambil elemen tombol dengan ID
+         const resetButton = document.getElementById('reset-btn');
+    
+        // Tambahkan event listener untuk klik
+        resetButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Mencegah tindakan default dari link
+            window.location.href = '/views/user-mnj/reset-password.html'; // Arahkan ke halaman login
+        });
+
+
+
+        //ACTION UNTUK AKSI BUTTON LOGIN
+        document.querySelector('form').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Cegah reload halaman
+            
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+
+            try {
+            const response = await fetch('http://localhost:8080/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const responseData = await response.json(); // Konsumsi body respons satu kali
+            console.log('Response:', responseData);
+
+            if (!response.ok) {
+                // Tampilkan pesan error dari server
+                document.getElementById('error-message').textContent = responseData.message || 'Email atau Password salah atau akun belum terverifikasi.';
+                document.getElementById('error-message').style.display = 'block';
+                return;
+            }
+
+            // Simpan data pengguna ke sessionStorage
+            sessionStorage.setItem('email', responseData.email);
+            sessionStorage.setItem('is_verified', responseData.status); // Pastikan responseData memiliki properti 'nama'
+
+
+
+            // Login berhasil, lakukan redirect berdasarkan jabatan
+            if (responseData.jabatan === 'admin') {
+                console.log(`User berhasil login dengan email: ${responseData.email}, jabatan: ${responseData.jabatan}`);
+                alert(responseData.email)
+                window.location.href = '../sp/admin/home.html';
+            } else if (responseData.jabatan === 'anggota') {
+                alert(responseData.email, responseData.is_verified)
+                console.log(`User berhasil login dengan email: ${responseData.email}, jabatan: ${responseData.jabatan}`);
+                window.location.href = '../sp/anggota/home.html';
+            } else {
+                document.getElementById('error-message').textContent = 'Jabatan tidak valid.';
+                document.getElementById('error-message').style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('error-message').textContent = 'Terjadi kesalahan pada server.';
+            document.getElementById('error-message').style.display = 'block';
+        }
+
+});
+
+
+//kondisi verify email 
+// Ambil query parameter 'message' dan tampilkan
+const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+        
+        if (message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('alert', 'alert-success');
+            messageDiv.innerText = decodeURIComponent(message);
+            document.querySelector('.login-container').insertBefore(messageDiv, document.querySelector('form'));
+        }
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

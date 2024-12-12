@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:;base64,=">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Detail Anggota</title>
+   
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Logo">
+            </a>
+            <!-- Profile Icon -->
+            <div class="profile-icon">
+                <i class="bi bi-person"></i>
+                <div class="profile-dropdown">
+                    <h5>John Doe</h5>
+                    <p>Email: john.doe@example.com</p>
+                    <a href="profile.html">View Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- <h5>Menu</h5> -->
+        <a href="home.html"><i class="bi bi-house-door"></i> Home</a>
+        <a href="#"><i class="bi bi-wallet2"></i> Simpanan</a>
+        <a href="#"><i class="bi bi-arrow-up-right"></i> Pinjaman</a>
+        <a href="#"><i class="bi bi-gift"></i> Angsuran</a>
+        <!-- <a href="profile.html"><i class="bi bi-arrow-repeat"></i> Profile</a> -->
+        <a href="daftar_anggota.html" ><i class="bi bi-person"></i> Daftar Anggota</a>
+        <a href="daftar_pengajuan.html" class="active"><i class="bi bi-gift"></i> Daftar Pengajuan</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <div id="infoTable">
+            <h2>Detail Informasi Calon Anggota</h2>
+            <button>Setujui</button>
+    
+            <table>
+                <tr>
+                    <th colspan="2">Data Pribadi</th>
+                </tr>
+                <tr>
+                    <td>Nama Lengkap</td>
+                    <!-- <td>{{.Nama_lengkap}}</td> -->
+                     <td id="nama_lengkap">-</td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <!-- <td>{{.Jenis_kelamin}}</td> -->
+                     <td id="jenis_kelamin">-</td>
+                </tr>
+                <tr>
+                    <td>Tempat</td>
+                    <!-- <td>{{.Tempat}}</td> -->
+                     <td id="tempat">-</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Lahir</td>
+                    <!-- <td>{{.Tanggal_lahir.Format "02-01-2006"}}</td> -->
+                     <td id="tanggal_lahir">-</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <!-- <td>{{.Status}}</td> -->
+                     <td id="status">-</td>
+                </tr>
+                <tr>
+                    <td>Agama</td>
+                    <!-- <td>{{.Agama}}</td> -->
+                     <td id="agama">-</td>
+                </tr>
+                <tr>
+                    <td>Pekerjaan</td>
+                    <!-- <td>{{.Pekerjaan}}</td> -->
+                     <td id="pekerjaan">-</td>
+                </tr>
+                <tr>
+                    <th colspan="2">Kontak</th>
+                     <!-- <td id="no_telepon">-</td> -->
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <!-- <td>{{.Alamat}}</td> -->
+                     <td id="alamat">-</td>
+                </tr>
+                <tr>
+                    <td>Kota</td>
+                    <!-- <td>{{.Kota}}</td> -->
+                     <td id="kota">-</td>
+                </tr>
+                <tr>
+                    <td>Kode Pos</td>
+                    <!-- <td>{{.Kode_pos}}</td> -->
+                     <td id="kode_pos">-</td>
+                </tr>
+                <tr>
+                    <td>No Telepon</td>
+                    <!-- <td>No_telepon</td> -->
+                     <td id="no_telepon">-</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td id="profile-email">-</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <!-- <td>{{.Password}}</td> -->
+                     <td id="password">-</td>
+                </tr>
+                <tr>
+                    <th colspan="2">Status Anggota</th>
+                </tr>
+                <tr>
+                    <td>Status Anggota</td>
+                    <!-- <td>{{.Verified}}</td> -->
+                     <td id="verified">-</td>
+                </tr>
+                <tr>
+                    <td>Tanggal Bergabung</td>
+                    <!-- <td>{{.Tanggal_bergabung.Format "02-01-2006"}}</td> -->
+                     <td id="tanggal_bergabung">-</td>
+                </tr>
+                <tr>
+                    <th colspan="2">Verifikasi Akun</th>
+                </tr>
+                <tr>
+                    <td>KTP</td>
+                    <td id="ktp">
+                        <img src="" alt="KTP" id="ktp-img" style="width: 200px; display: none;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kartu Keluarga</td>
+                    <td id="kk">
+                        <img src="" alt="KK" id="kk-img" style="width: 200px; display: none;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Rekening Koran</td>
+                    <td id="rekening_koran">
+                        <img src="" alt="Rekening Koran" id="rekening-koran-img" style="width: 200px; display: none;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Surat Bukti Domisili</td>
+                    <td id="prove_of_residence">
+                        <img src="" alt="Surat Bukti Domisili" id="prove-of-residence-img" style="width: 200px; display: none;">
+                    </td>
+                </tr>
+                
+            </table>
+    
+        </div>
+    
+        </div>
+
+    <script src="script.js"></script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", async function () {
+    // Ambil ID dari query string
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id"); // Ambil parameter `id`
+    console.log(`ID Anggota: ${id}`);
+
+    if (!id) {
+        alert("ID anggota tidak ditemukan di URL!");
+        return;
+    }
+
+    try {
+        // Kirim permintaan GET ke server untuk mengambil data berdasarkan ID
+        const response = await fetch(`http://localhost:8080/api/profileAnggotaDetail?id=${encodeURIComponent(id)}`);
+        if (!response.ok) {
+            throw new Error("Gagal mengambil data dari server");
+        }
+
+        const data = await response.json();
+
+        // Isi data di form HTML
+        document.getElementById("nama_lengkap").textContent = data.nama_lengkap || "-";
+        document.getElementById("jenis_kelamin").textContent = data.jenis_kelamin || "-";
+        document.getElementById("tempat").textContent = data.tempat || "-";
+        document.getElementById("tanggal_lahir").textContent = data.tanggal_lahir || "-";
+        document.getElementById("status").textContent = data.status || "-";
+        document.getElementById("agama").textContent = data.agama || "-";
+        document.getElementById("pekerjaan").textContent = data.pekerjaan || "-";
+        document.getElementById("alamat").textContent = data.alamat || "-";
+        document.getElementById("kota").textContent = data.kota || "-";
+        document.getElementById("kode_pos").textContent = data.kode_pos || "-";
+        document.getElementById("no_telepon").textContent = data.no_telepon || "-";
+        document.getElementById("profile-email").textContent = data.email || "-";
+        document.getElementById("verified").textContent = data.verified || "-";
+        document.getElementById("tanggal_bergabung").textContent = data.tanggal_bergabung || "-";
+        document.getElementById("ktp").textContent = data.ktp ? "Uploaded" : "-";
+        document.getElementById("kk").textContent = data.kk ? "Uploaded" : "-";
+        document.getElementById("rekening_koran").textContent = data.rekening_koran ? "Uploaded" : "-";
+        document.getElementById("prove_of_residence").textContent = data.prove_of_residence ? "Uploaded" : "-";
+    
+    
+         // Gambar Verifikasi Akun
+         if (data.ktp) {
+            const ktpImg = document.getElementById("ktp-img");
+            ktpImg.src = data.ktp; // URL dari server
+            ktpImg.style.display = "block"; // Tampilkan gambar
+        }
+
+        if (data.kk) {
+            const kkImg = document.getElementById("kk-img");
+            kkImg.src = data.kk; // URL dari server
+            kkImg.style.display = "block";
+        }
+
+        if (data.rekening_koran) {
+            const rekeningKoranImg = document.getElementById("rekening-koran-img");
+            rekeningKoranImg.src = data.rekening_koran; // URL dari server
+            rekeningKoranImg.style.display = "block";
+        }
+
+        if (data.prove_of_residence) {
+            const proveOfResidenceImg = document.getElementById("prove-of-residence-img");
+            proveOfResidenceImg.src = data.prove_of_residence; // URL dari server
+            proveOfResidenceImg.style.display = "block";
+        }
+    
+    
+    
+    } catch (error) {
+        console.error("Error fetching detail:", error);
+        alert("Gagal memuat detail anggota. Silakan coba lagi nanti.");
+    }
+});
+
+</script>
+
+
+
+</body>
+</html>

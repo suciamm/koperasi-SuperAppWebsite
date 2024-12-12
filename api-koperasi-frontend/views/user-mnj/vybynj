@@ -1,0 +1,51 @@
+ document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("updateForm");
+            const responseMessage = document.getElementById("responseMessage");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                // Mengambil nilai dari form
+                const id = document.getElementById("id").value;
+                const nama = document.getElementById("nama").value;
+                const jurusan = document.getElementById("jurusan").value;
+                const fakultas = document.getElementById("fakultas").value;
+
+                // Membuat payload untuk API
+                const payload = {
+                    id: id,
+                    nama: nama,
+                    jurusan: jurusan,
+                    fakultas: fakultas,
+                };
+
+                // Mengirimkan data ke API
+                fetch("http://localhost:8080/api/mhsUpdate", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Gagal memperbarui data.");
+                        }
+                        return response.text();
+                    })
+                    .then((message) => {
+                        responseMessage.innerHTML = `<div class="alert alert-success">${message}</div>`;
+                        form.reset();
+                    })
+                    .catch((error) => {
+                        responseMessage.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+                    });
+            });
+        });
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+            const mhsId = urlParams.get('id');
+            console.log(
+                "ID yang diterima:", mhsId);
+            alert(`ID yang diterima: ${mhsId}`);

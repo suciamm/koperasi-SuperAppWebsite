@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:;base64,=">
+
+    <title>Registrasi User</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Logo">
+            </a>
+            <!-- Profile Icon -->
+            <div class="profile-icon">
+                <i class="bi bi-person"></i>
+                <div class="profile-dropdown">
+                    <h5>John Doe</h5>
+                    <p>Email: john.doe@example.com</p>
+                    <a href="profile.html">View Profile</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="home.html"><i class="bi bi-house-door"></i> Home</a>
+        <a href="#"><i class="bi bi-wallet2"></i> Simpanan</a>
+        <a href="#"><i class="bi bi-arrow-up-right"></i> Pinjaman</a>
+        <a href="#"><i class="bi bi-gift"></i> Angsuran</a>
+        <!-- <a href="profile.html" class="active"><i class="bi bi-arrow-repeat"></i> Profile</a> -->
+    </div>
+
+
+    <!-- Konten spesifik halaman -->
+    <div class="content">
+        <!-- Informasi Awal -->
+
+        <!-- Form Input (Awalnya Disembunyikan) -->
+        <div id="formContainer">
+            <h2>Formulir Data Pribadi</h2>
+            <form id="register-form">
+                <!-- <form action="http://localhost:8080/api/register2" method="POST" enctype="multipart/form-data" id="register-form"> -->
+
+                <table>
+                    <!-- Kategori Data Pribadi -->
+                    <tr>
+                        <th colspan="2">Data Pribadi</th>
+                    </tr>
+                    <tr>
+                        <td><label for="nama_lengkap">Nama Lengkap</label></td>
+                        <td><input type="text" id="nama_lengkap" name="nama_lengkap" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="jenis_kelamin">Jenis Kelamin</label></td>
+                        <td>
+                            <select id="jenis_kelamin" name="jenis_kelamin" required>
+                                <option value="L">L</option>
+                                <option value="P">P</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="tempat">Tempat Lahir</label></td>
+                        <td><input type="text" id="tempat" name="tempat" required /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="tanggal_lahir">Tanggal Lahir</label></td>
+                        <td><input type="date" id="tanggal_lahir" name="tanggal_lahir" required /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="status">Status</label></td>
+                        <td>
+                            <select id="status" name="status" required>
+                                <option value="Belum Kawin">Belum Kawin</option>
+                                <option value="Sudah Kawin">Sudah Kawin</option>
+                                <option value="Cerai Hidup">Cerai Hidup</option>
+                                <option value="Cerai Mati">Cerai Mati</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="agama">Agama</label></td>
+                        <td>
+                            <select id="agama" name="agama" required>
+                                <option value="Islam">Islam</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Protestan">Protestan</option>
+                                <option value="Katholik">Katholik</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="pekerjaan">Pekerjaan</label></td>
+                        <td><input type="text" id="pekerjaan" name="pekerjaan" required /></td>
+                    </tr>
+
+                    <!-- Kategori Kontak -->
+                    <tr>
+                        <th colspan="2">Kontak</th>
+                    </tr>
+                    <tr>
+                        <td><label for="alamat">Alamat</label></td>
+                        <td><input type="text" id="alamat" name="alamat" required /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="kota">Kota</label></td>
+                        <td><input type="text" id="kota" name="kota" required /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="kota">Kode pos</label></td>
+                        <td><input type="text" id="kode_pos" name="kode_pos" required /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="no_telepon">No Telepon</label></td>
+                        <td><input type="tel" id="no_telepon" name="no_telepon" required /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="profile-email">Email</label></td>
+                        <!-- <td><input type="email" id="profile-email" name="profile-email" disabled /></td> -->
+                        <td id="profile-email"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="verified">Status User</label></td>
+                        <!-- <td><input type="email" id="verified" name="verified" disabled /></td> -->
+                        <td id="verified"></td>
+                    </tr> 
+
+                    <!-- Kategori Status Anggota -->
+                    <!-- <tr>
+                        <th colspan="2">Status Anggota</th>
+                    </tr>
+                    <tr>
+                        <td><label for="verified">Status Anggota</label></td>
+                        <td>
+                            <select id="verified" name="verified" required>
+                                <option value="Aktif">Aktif</option>
+                                <option value="Tidak Aktif">Tidak Aktif</option>
+                            </select>
+                        </td>
+                    </tr> -->
+                    <!-- <tr>
+                    <td><label for="tanggal_bergabung">Tanggal Bergabung</label></td>
+                    <td><input type="date" id="tanggal_bergabung" name="tanggal_bergabung" disabled/></td>
+                </tr> -->
+
+                    <!-- Kategori Verifikasi Data -->
+                    <tr>
+                        <th colspan="2">Verifikasi Data</th>
+                    </tr>
+                    <tr>
+                        <td><label for="ktp">Upload KTP</label></td>
+                        <td><input type="file" id="ktp" name="ktp" accept=".jpg,.jpeg,.png" required />
+                            <span id="ktp-error" style="color: red; display: none;">Only JPG, PNG, or JPEG files are allowed.</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="kk">Upload KK</label></td>
+                        <td><input type="file" id="kk" name="kk" accept=".jpg,.jpeg,.png" required /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="rekening_koran">Upload Rekening Koran</label></td>
+                        <td><input type="file" id="rekening_koran" name="rekening_koran" accept=".jpg,.jpeg,.png"required /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="prove_of_residence">Upload Prove of Residence</label></td>
+                        <td><input type="file" id="prove_of_residence" name="prove_of_residence"accept=".jpg,.jpeg,.png" required /></td>
+                    </tr>
+
+                    <!-- Tombol Submit -->
+                    <tr>
+                        <td colspan="1"><a href="profile.html"><button type="">Batal</button></a></td>
+                        <td colspan="1"><button type="submit" id="submit-btn">Kirim</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <script>
+
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const email = sessionStorage.getItem('email'); // Ambil email dari sessionStorage
+            const verified= sessionStorage.getItem('verified');
+            if (!verified) {
+                console.log('Email tidak ditemukan di sessionStorage');
+                return;
+            }
+            // alert(email)
+            try {
+                // Kirim permintaan GET ke server untuk mengambil data berdasarkan email
+                const response = await fetch(`http://localhost:8080/api/profile?email=${encodeURIComponent(email)}`);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('profile-email').textContent = `${email}`;
+                    document.getElementById('verified').textContent = `${verified}`;
+
+                } else {
+                    console.error(`Error: ${response.status} - ${response.statusText}`);
+                    alert(`Failed to fetch profile data. Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error("Error fetching profile data:", error);
+                alert("Error fetching profile data. Please check your connection and try again.");
+            }
+        });
+
+        document.getElementById("register-form").addEventListener("submit", async function (event) {
+            event.preventDefault(); // Mencegah refresh halaman
+
+            // Ambil email dari sessionStorage
+            const email = sessionStorage.getItem("email");
+            if (!email) {
+                alert("Email tidak ditemukan. Harap login kembali.");
+                return;
+            }
+
+            // Ambil data dari form
+            const formData = new FormData(this);
+
+            const data = {   
+                nama_lengkap: formData.get("nama_lengkap"),
+                jenis_kelamin: formData.get("jenis_kelamin"),
+                tempat: formData.get("tempat"),
+                tanggal_lahir: formData.get("tanggal_lahir"),
+                status: formData.get("status"),
+                agama: formData.get("agama"),
+                pekerjaan: formData.get("pekerjaan"),
+                alamat: formData.get("alamat"),
+                kota: formData.get("kota"),
+                kode_pos: formData.get("kode_pos"),
+                no_telepon: formData.get("no_telepon"),
+                email: email, // Tambahkan email untuk identifikasi
+                verified:verified,
+                ktp: formData.get("ktp"),
+                kk: formData.get("kk"),
+                rekening_koran: formData.get("rekening_koran"),
+                prove_of_residence: formData.get("prove_of_residence"),
+            };
+            console.log("detail data: ",data)
+            try {
+                const formData = new FormData(document.getElementById("register-form"));
+                formData.append("email", email);
+
+                
+                fetch(`http://localhost:8080/api/register2?email=${encodeURIComponent(email)}`, {
+                    method: "PUT",
+                    body: formData, // Jangan tambahkan Content-Type secara manual
+                    }).then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+                        throw new Error("Gagal memperbarui data.");
+                    }).then(data => {
+                        alert(data.message || "Data berhasil diperbarui!");
+                        window.location.href = "profile.html";
+                }).catch(error => {
+                    console.error("Error during data submission:", error);
+                    alert("Gagal memperbarui data. Silakan coba lagi.");
+                });
+            } catch (error) {
+                console.error("Error during data submission:", error);
+                alert("Gagal memperbarui data. Silakan coba lagi.");
+            }
+        });
+
+
+    </script>
+
+
+
+
+
+
+</body>
+
+
+</html>

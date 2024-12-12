@@ -1,0 +1,145 @@
+func GetSPAdminByEmail(email string) (*SP_admin, error) {
+    var admin SP_admin
+    var tanggalLahirStr, tanggalBergabungStr string // Temp variable for date strings
+
+    query := `
+        SELECT 
+            ud.id, ud.nama_lengkap, ud.jenis_kelamin, ud.tempat, ud.tanggal_lahir, ud.status, ud.agama, 
+            ud.pekerjaan, ud.alamat, ud.kota, ud.kode_pos, ud.no_telepon, 
+            u.is_verified AS verified, u.created_at AS tanggal_bergabung, 
+            u.email, u.password, 
+            ud.ktp, ud.kk, ud.rekening_koran, ud.prove_of_residence
+        FROM users_details ud
+        INNER JOIN users u ON ud.email = u.email
+        WHERE u.email = ? 
+    `
+
+    fmt.Println("masuk model profile admin")
+    err := config.DB.QueryRow(query, email).Scan(
+        &admin.Id, &admin.Nama_lengkap, &admin.Jenis_kelamin, &admin.Tempat, &tanggalLahirStr,
+        &admin.Status, &admin.Agama, &admin.Pekerjaan, &admin.Alamat, &admin.Kota,
+        &admin.Kode_pos, &admin.No_telepon, &admin.Verified, &tanggalBergabungStr,
+        &admin.Email, &admin.Password, &admin.Ktp, &admin.Kk, &admin.Rekening_koran,
+        &admin.Prove_of_residence,
+    )
+
+    
+    if err != nil {
+        if err == sql.ErrNoRows {
+            return nil, errors.New("data admin tidak ditemukan")
+        }
+        log.Println("Error querying admin:", err)
+        return nil, err
+    }
+
+    // Parsing tanggal lahir
+    admin.Tanggal_lahir, err = time.Parse("2006-01-02", tanggalLahirStr)
+    if err != nil {
+        log.Printf("Error parsing tanggal_lahir: %v\n", err)
+        return nil, errors.New("gagal memproses tanggal lahir")
+    }
+
+    // Parsing tanggal bergabung
+    admin.Tanggal_bergabung, err = time.Parse("2006-01-02 15:04:05", tanggalBergabungStr)
+    if err != nil {
+        log.Printf("Error parsing tanggal_bergabung: %v\n", err)
+        return nil, errors.New("gagal memproses tanggal bergabung")
+    }
+    fmt.Println(&admin)
+    return &admin, nil
+}
+
+
+
+>menu-profile
+  >contProfile
+    -penggunacontroller.go
+  >modProfile
+    -penggunamodel.go
+  >config
+    -database.go
+  >shared
+    -types.go
+  >uploads
+    //berisi semua file gambar inputan user
+
+
+
+
+
+
+
+
+
+
+corsHandler := cors.New(cors.Options{
+    AllowedOrigins:   []string{"http://localhost:8001"}, // Ganti dengan origin frontend Anda
+    AllowedMethods:   []string{"GET", "POST", "OPTIONS"},
+    AllowedHeaders:   []string{"Content-Type", "Authorization"},
+    AllowCredentials: true,
+}).Handler(router)
+
+// Menjalankan server dengan handler CORS yang sudah dibungkus
+http.Handle("/", corsHandler)
+
+
+
+
+func RegisterUser2(w http.ResponseWriter, r *http.Request) {
+	// Ambil parameter email dari query string
+	email := r.URL.Query().Get("email")
+    log.Println("ini halaman buat update registrasi usernya yooo --------------------: ", email)
+	if email == "" {
+		http.Error(w, "Email is required", http.StatusBadRequest)
+		return
+	}
+    query := `UPDATE users_details SET 
+        nama_lengkap = ?, jenis_kelamin = ?, tempat = ?, tanggal_lahir = ?, 
+        status = ?, agama = ?, pekerjaan = ?, alamat = ?, kota = ?, 
+        kode_pos = ?, no_telepon = ?, verified = ?,
+        ktp = ?, kk = ?, rekening_koran = ?, prove_of_residence = ?
+        WHERE email = ?`
+
+
+	// Eksekusi query
+	row := config.DB.QueryRow(query, email)
+
+	// Struct untuk menampung hasil query
+	var user struct {
+		NamaLengkap      string `json:"nama_lengkap"`
+		JenisKelamin     string `json:"jenis_kelamin"`
+		Tempat           string `json:"tempat"`
+		TanggalLahir     string `json:"tanggal_lahir"`
+		Status           string `json:"status"`
+		Agama            string `json:"agama"`
+		Pekerjaan        string `json:"pekerjaan"`
+		Alamat           string `json:"alamat"`
+		Kota             string `json:"kota"`
+		KodePos          string `json:"kode_pos"`
+		NoTelepon        string `json:"no_telepon"`
+		Email            string `json:"email"`
+		Verified         string `json:"verified"`
+		TanggalBergabung string `json:"tanggal_bergabung"`
+		KTP              string `json:"ktp"`
+		KK               string `json:"kk"`
+		RekeningKoran    string `json:"rekening_koran"`
+		ProveOfResidence string `json:"prove_of_residence"`
+	}
+
+	// Scan hasil query ke struct
+	err := row.Scan(
+		&user.NamaLengkap, &user.JenisKelamin, &user.Tempat, &user.TanggalLahir,
+		&user.Status, &user.Agama, &user.Pekerjaan, &user.Alamat, &user.Kota, &user.KodePos,
+		&user.NoTelepon, &user.Email, &user.Verified, &user.TanggalBergabung,
+		&user.KTP, &user.KK, &user.RekeningKoran, &user.ProveOfResidence,
+	)
+	if err != nil {
+		http.Error(w, "User not found", http.StatusNotFound)
+		return
+	}
+
+	// Kirim data sebagai JSON
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(user)
+}
+

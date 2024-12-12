@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Registrasi</title> -->
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .reset-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .reset-container h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .reset-container input[type="text"],
+        .reset-container input[type="email"],
+        .reset-container input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .reset-container .reset-btn {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .reset-container .reset-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .reset-container .login-link {
+            display: block;
+            margin-top: 1rem;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .reset-container p{
+            color: #9c9a9a;
+            text-align: left;
+            font-size: 13px;
+        }
+        .reset-container .login-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reset-container">
+        <h2>Create a new password</h2>
+        <form action="/updatePassword" method="post">
+            <input type="hidden" name="token" value="{{.Token}}">
+            <input type="password" name="password" placeholder="New Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm New Password" required>
+            <button type="submit" class="reset-btn">Reset Password</button>
+        </form>
+        <a href="/login" class="login-link">Back</a>
+    </div>
+
+</body>
+</html>

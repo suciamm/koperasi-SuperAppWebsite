@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:;base64,=">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <title>Detail Anggota</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+    
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            background-color: #f3f0f0;
+            border-right: 1px solid #fafafb;
+            padding: 20px 10px;
+        }
+        .sidebar h5 {
+            font-weight: bold;
+            color: #000;
+        }
+    
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 5px;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #d0d0d2;
+        }
+    
+        .content {
+            margin-left: 287px;
+            padding: 20px;
+            width: 75%;
+        }
+    
+        .navbar {
+            background-color: #f9fade;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        .navbar-brand img {
+            height: 50px;
+        }
+    
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        .section h2 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    
+        .info-table th, .info-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        .info-table th {
+            background-color: #f9f9f9;
+            color: #555;
+        }
+    
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    
+        td {
+            background-color: #f9f9f9;
+        }
+    
+        .table-responsive {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+    
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="logo.png" alt="Logo">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- <h5>Menu</h5> -->
+        <a href="home.html"><i class="bi bi-house-door"></i> Home</a>
+        <a href="#"><i class="bi bi-wallet2"></i> Simpanan</a>
+        <a href="#"><i class="bi bi-arrow-up-right"></i> Pinjaman</a>
+        <a href="#"><i class="bi bi-gift"></i> Angsuran</a>
+        <a href="profile.html"><i class="bi bi-arrow-repeat"></i> Profile</a>
+        <a href="daftar_anggota.html" class="active"><i class="bi bi-person"></i> Daftar Anggota</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Data Pribadi Section -->
+        <div class="section">
+            <h2>Data Pribadi</h2>
+            <table class="info-table">
+                <tbody>
+                    <tr><th>Nama Lengkap</th><td id="nama_lengkap"></td></tr>
+                    <tr><th>Jenis Kelamin</th><td id="jenis_kelamin"></td></tr>
+                    <tr><th>Tempat, Tanggal Lahir</th><td id="ttl"></td></tr>
+                    <tr><th>Status</th><td id="status"></td></tr>
+                    <tr><th>Agama</th><td id="agama"></td></tr>
+                    <tr><th>Pekerjaan</th><td id="pekerjaan"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Kontak Section -->
+        <div class="section">
+            <h2>Kontak</h2>
+            <table class="info-table">
+                <tbody>
+                    <tr><th>Alamat</th><td id="alamat"></td></tr>
+                    <tr><th>Kota</th><td id="kota"></td></tr>
+                    <tr><th>Kode Pos</th><td id="kode_pos"></td></tr>
+                    <tr><th>No Telepon</th><td id="no_telepon"></td></tr>
+                    <tr><th>Email</th><td id="email"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Dokumen Section -->
+        <div class="section">
+            <h2>Dokumen</h2>
+            <table class="info-table">
+                <tbody>
+                    <tr><th>KTP</th><td id="ktp"></td></tr>
+                    <tr><th>KK</th><td id="kk"></td></tr>
+                    <tr><th>Rekening Koran</th><td id="rekening_koran"></td></tr>
+                    <tr><th>Bukti Tempat Tinggal</th><td id="prove_of_residence"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Status Keanggotaan Section -->
+        <div class="section">
+            <h2>Status Keanggotaan</h2>
+            <table class="info-table">
+                <tbody>
+                    <tr><th>Verified</th><td id="verified"></td></tr>
+                    <tr><th>Tanggal Bergabung</th><td id="tanggal_bergabung"></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script>
+                //GET DATA DETAIL
+                document.addEventListener("DOMContentLoaded", async function () {
+            const email = sessionStorage.getItem('email'); // Ambil email dari sessionStorage
+            if (!email) {
+                console.log('Email tidak ditemukan di sessionStorage');
+                return;
+            }
+            // alert(email)
+            try {
+                // Kirim permintaan GET ke server untuk mengambil data berdasarkan email
+                const response = await fetch(`http://localhost:8080/api/profile?email=${encodeURIComponent(email)}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Isi data di form HTML
+                    document.getElementById('nama_lengkap').textContent = data.nama_lengkap || '-';
+                    document.getElementById('jenis_kelamin').textContent = data.jenis_kelamin || '-';
+                    document.getElementById('tempat').textContent = data.tempat || '-';
+                    document.getElementById('tanggal_lahir').textContent = data.tanggal_lahir || '-';
+                    document.getElementById('status').textContent = data.status || '-';
+                    document.getElementById('agama').textContent = data.agama || '-';
+                    document.getElementById('pekerjaan').textContent = data.pekerjaan || '-';
+                    document.getElementById('alamat').textContent = data.alamat || '-';
+                    document.getElementById('kota').textContent = data.kota || '-';
+                    document.getElementById('kode_pos').textContent = data.kode_pos || '-';
+                    document.getElementById('no_telepon').textContent = data.no_telepon || '-';
+                    document.getElementById('profile-email').textContent = `${email}`;
+                    document.getElementById('verified').textContent = data.verified || '-';
+                    document.getElementById('tanggal_bergabung').textContent = data.tanggal_bergabung || '-';
+                    document.getElementById('ktp').textContent = data.ktp ? 'Uploaded' : '-';
+                    document.getElementById('kk').textContent = data.kk ? 'Uploaded' : '-';
+                    document.getElementById('rekening_koran').textContent = data.rekening_koran ? 'Uploaded' : '-';
+                    document.getElementById('prove_of_residence').textContent = data.prove_of_residence ? 'Uploaded' : '-';
+                } else {
+                    console.error(`Error: ${response.status} - ${response.statusText}`);
+                    alert(`Failed to fetch profile data. Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error("Error fetching profile data:", error);
+                alert("Error fetching profile data. Please check your connection and try again.");
+
+            }
+        });
+
+        
+    </script>
+    <!-- <script>
+        // Ambil ID dari query string
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const userId = getQueryParam('id');
+
+        if (userId) {
+            console.log('User ID:', userId);  // Pastikan ID muncul di console
+
+            // Fetch data detail anggota dari backend
+            fetch(`http://localhost:8080/api/anggota/${userId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);  // Cek data yang diterima
+
+                    // Render data ke halaman
+                    document.getElementById('nama_lengkap').textContent = data.nama_lengkap;
+                    document.getElementById('jenis_kelamin').textContent = data.jenis_kelamin;
+                    document.getElementById('ttl').textContent = `${data.tempat}, ${new Date(data.tanggal_lahir).toLocaleDateString()}`;
+                    document.getElementById('status').textContent = data.status;
+                    document.getElementById('agama').textContent = data.agama;
+                    document.getElementById('pekerjaan').textContent = data.pekerjaan;
+                    document.getElementById('alamat').textContent = data.alamat;
+                    document.getElementById('kota').textContent = data.kota;
+                    document.getElementById('kode_pos').textContent = data.kode_pos;
+                    document.getElementById('no_telepon').textContent = data.no_telepon;
+                    document.getElementById('email').textContent = data.email;
+                    document.getElementById('ktp').textContent = data.ktp;
+                    document.getElementById('kk').textContent = data.kk;
+                    document.getElementById('rekening_koran').textContent = data.rekening_koran;
+                    document.getElementById('prove_of_residence').textContent = data.prove_of_residence;
+                    document.getElementById('verified').textContent = data.verified;
+                    document.getElementById('tanggal_bergabung').textContent = new Date(data.tanggal_bergabung).toLocaleDateString();
+                })
+                .catch(error => {
+                    console.error('Error fetching user details:', error);
+                    alert('Gagal mengambil detail anggota.');
+                });
+        } else {
+            alert('ID anggota tidak ditemukan!');
+        }
+    </script> -->
+</body>
+</html>

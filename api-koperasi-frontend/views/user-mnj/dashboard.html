@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Koperasi</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            /* padding: 1rem 2rem; */
+            padding: 10px;
+            color: #fff;
+        }
+
+        /* 
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        } */
+
+        .navbar .login-btn {
+            background-color: #2774b8;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .navbar .logo img {
+            height: 70px;
+            /* Atur tinggi logo */
+            max-width: 100%;
+            /* Hindari melebihi lebar kontainer */
+            object-fit: contain;
+            /* Menjaga proporsi logo */
+            display: inline-block;
+            /* Agar sejajar dengan teks atau elemen lainnya */
+        }
+
+        /* Main Content */
+        .content {
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="logo" />
+        </div>
+        <a href="/login" class="login-btn" id="login-btn">Login</a> <!-- Link ke halaman login -->
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Selamat Datang di Koperasi Kamiyyy</h1>
+        <p>Temukan berbagai layanan dan informasi untuk anggota koperasi.</p>
+        <!-- <img src="https://cdn.pixabay.com/photo/2024/04/02/12/34/ai-generated-8670831_1280.png" alt=""> -->
+    </div>
+
+
+    <script>
+        // Ambil elemen tombol dengan ID
+        const loginButton = document.getElementById('login-btn');
+    
+        // Tambahkan event listener untuk klik
+        loginButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Mencegah tindakan default dari link
+            window.location.href = '/views/user-mnj/login.html'; // Arahkan ke halaman login
+        });
+    </script>
+
+
+</body>
+
+</html>
